@@ -142,7 +142,7 @@ void listarFilmes(Filme vetorF[], int tamF, Cliente vetorC[], int tamC) {
                     cout << "Alugado por: " << vetorC[j].nome << endl;
             }
         } else {
-            cout << "Disponível\n";
+            cout << "Disponï¿½vel\n";
         }
         cout << "-----------------------------\n";
     }
@@ -174,7 +174,7 @@ void buscarFilmesPorCliente(Filme vetorF[], int tamF, Cliente vetorC[], int tamC
         }
     }
     if (!achouCliente) {
-        cout << "Cliente não encontrado.\n";
+        cout << "Cliente nï¿½o encontrado.\n";
     }
     cout << "\nFilmes alugados por " << nomeCliente << ":\n";
     bool achouFilme = false;
@@ -226,7 +226,7 @@ void salvarCliente (Cliente vet[]){
 
     meuArquivo.open("cliente.bin", ios::out | ios::binary);
 
-    if(meuArquivo.is_open()) {
+        if(meuArquivo.is_open()) {
         meuArquivo.write((char *) &posCliente, sizeof(int));
         meuArquivo.write((char *) vet, sizeof(Cliente) * posCliente);
         meuArquivo.close();
@@ -242,8 +242,9 @@ void salvarFilme (Filme vetf[], int n){
 
     meuArquivo.open("filme.bin", ios::out | ios::binary);
 
-    if(meuArquivo.is_open()) {
-        meuArquivo.write((char *) vetf, sizeof(Filme) * n);
+     if(meuArquivo.is_open()) {
+        meuArquivo.write((char *) &posFilme, sizeof(int));
+        meuArquivo.write((char *) vetf, sizeof(Filme) * posFilme);
         meuArquivo.close();
         cout << "Informacoes salvas com sucesso!!\n";
     }
@@ -258,7 +259,8 @@ void salvarProdutora (IndustriaCine veti[], int n){
     meuArquivo.open("prod.bin", ios::out | ios::binary);
 
     if(meuArquivo.is_open()) {
-        meuArquivo.write((char *) veti, sizeof(IndustriaCine) * n);
+        meuArquivo.write((char *) &posIndustriaCine, sizeof(int));
+        meuArquivo.write((char *) veti, sizeof(IndustriaCine) * posIndustriaCine);
         meuArquivo.close();
         cout << "Informacoes salvas com sucesso!!\n";
     }
@@ -290,9 +292,8 @@ void carregarFilme(Filme vetf[], int *n){
     meuArquivo.open("filme.bin", ios::in | ios::binary);
 
     if(meuArquivo.is_open()) {
-
-        meuArquivo.read((char *) vetf, sizeof(Filme) * N);
-        *n = meuArquivo.gcount() / sizeof(Filme);
+        meuArquivo.read((char *) &posFilme, sizeof(int));
+        meuArquivo.read((char *) vetf, sizeof(Filme)* posFilme);
 
         meuArquivo.close();
         cout << "Filmes carregados com sucesso!\n";
@@ -307,10 +308,9 @@ void carregarProdutora(IndustriaCine veti[], int *n){
 
     meuArquivo.open("prod.bin", ios::in | ios::binary);
 
-    if(meuArquivo.is_open()) {
-
-        meuArquivo.read((char *) veti, sizeof(IndustriaCine) * N);
-        *n = meuArquivo.gcount() / sizeof(IndustriaCine);
+     if(meuArquivo.is_open()) {
+        meuArquivo.read((char *) &posIndustriaCine, sizeof(int));
+        meuArquivo.read((char *) veti, sizeof(IndustriaCine)* posIndustriaCine);
 
         meuArquivo.close();
         cout << "Produtoras carregadas com sucesso!\n";
