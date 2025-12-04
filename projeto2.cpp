@@ -53,13 +53,9 @@ void menu() {
     cout << "6 - Listar Produtora\n";
     cout << "7 - Buscar Filmes por Cliente\n";
     cout << "8 - Relatorio Geral\n";
-    cout << "9 - Salvar Cliente\n";
-    cout << "10 - Salvar Filme\n";
-    cout << "11 - Salvar Produtora\n";
-    cout << "12 - Carregar Cliente\n";
-    cout << "13 - Carregar Filme\n";
-    cout << "14 - Carregar Produtora\n";
-    cout << "15 - Sair\n";
+    cout << "9 - Salvar\n";
+    cout << "10 - carregar\n";
+    cout << "11 - Sair\n";
     cout << "Digite sua opcao: ";
 }
 
@@ -371,37 +367,24 @@ int main() {
 
         case 9:
             salvarCliente(vetorC);
-            break;
-
-        case 10:
             salvarFilme(vetorF, posFilme);
-            break;
-
-        case 11:
             salvarProdutora(vetorI, posIndustriaCine);
             break;
 
-        case 12:
+        case 10:
             carregarCliente(vetorC);
-            break;
-
-        case 13:
             carregarFilme(vetorF, &posFilme);
-            break;
-
-        case 14:
             carregarProdutora(vetorI, &posIndustriaCine);
             break;
 
-        case 15:
+        case 11:
             cout << "Saindo do sistema...\n";
             break;
-
         default:
             cout << "Opcao invalida.\n";
     }
 
-} while (escolha != 15);
+} while (escolha != 11);
 
     return 0;
 }
